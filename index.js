@@ -6,36 +6,43 @@ var csSpriteLite = new Class({
     require('uclass/options')
   ],
 
+  options : {
+    interval : 100,
+    anchor : document.body,
+    loop_from : 0,
+    ignored_frames : [],
+    loop_start_coor : {
+      x : 0, y : 0
+    },
+    current_position : {
+      x : 0, y : 0
+    }
+  },
+
   initialize : function(options) {
-
     var self = this;
-    self.interval = options.interval || 100;
+    self.setOptions(options);
     self.sprite_opts = options.sprite;
-    self.anchor = options.anchor;
-    self.loop_from = options.loop_from || 0;
-    self.ignored_frames = options.ignored_frames || [];
-
-    self.loop_start_coor = self.current_position = {x : 0, y : 0}
   },
 
   nextStep : function() {
     var self = this;
 
-    if (self.loop_from == self.frame && !self.loop_flag) {
-      self.loop_start_coor = {x : self.current_position.x, y : self.current_position.y};
+    if (self.options.loop_from == self.frame && !self.loop_flag) {
+      self.options.loop_start_coor = {x : self.options.current_position.x, y : self.options.current_position.y};
       self.loop_flag = true;
     }
 
-    self.current_position.x += self.sprite_opts.element_width;
-    if (self.img_size.width <= self.current_position.x) 
-      self.current_position = {x : 0, y : self.current_position.y + self.sprite_opts.element_height};
+    self.options.current_position.x += self.sprite_opts.element_width;
+    if (self.img_size.width <= self.options.current_position.x) 
+      self.options.current_position = {x : 0, y : self.options.current_position.y + self.sprite_opts.element_height};
 
-    if (self.img_size.height <= self.current_position.y) {
-      self.frame = self.loop_from;
-      self.current_position = {x : self.loop_start_coor.x, y : self.loop_start_coor.y};
+    if (self.img_size.height <= self.options.current_position.y) {
+      self.frame = self.options.loop_from;
+      self.options.current_position = {x : self.options.loop_start_coor.x, y : self.options.loop_start_coor.y};
     }
 
-    if (self.ignored_frames.indexOf(self.frame) !== -1)
+    if (self.options.ignored_frames.indexOf(self.frame) !== -1)
       self.nextStep();
   },
 
@@ -65,7 +72,7 @@ var csSpriteLite = new Class({
         "height"             : self.sprite_opts.element_height || 200
       });
 
-      self.anchor.appendChild(canvas);
+      self.options.anchor.appendChild(canvas);
 
       self.frame = 0,
       self.loop_flag = false;
@@ -73,11 +80,11 @@ var csSpriteLite = new Class({
       setInterval(function() {
         self.nextStep();
         self.setStyles(canvas, {
-          "backgroundPosition" : "-" + self.current_position.x + "px -" + self.current_position.y + "px"
+          "backgroundPosition" : "-" + self.options.current_position.x + "px -" + self.options.current_position.y + "px"
         });
 
         self.frame++;
-      }, self.interval);
+      }, self.options.interval);
     };
     src_img.src = self.sprite_opts.url;
   }
