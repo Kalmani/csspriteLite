@@ -7,11 +7,12 @@ document.onreadystatechange = function () {
       anchor : document.getElementById('cssprit-container'),
       sprite : {
         url : "sprite.png",
-        element_width  : 450,
-        element_height : 400
+        element_width  : 184, //450
+        element_height : 325 //450
       },
-      loop_from : 21,
-      ignored_frames : [62]
+      loop_from : 0, //21
+      ignored_frames : [], //62?
+      interval : 100
     });
 
     sprite.play();

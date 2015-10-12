@@ -9,7 +9,7 @@ var csSpriteLite = new Class({
   initialize : function(options) {
 
     var self = this;
-
+    self.interval = options.interval || 100;
     self.sprite_opts = options.sprite;
     self.anchor = options.anchor;
     self.loop_from = options.loop_from || 0;
@@ -34,6 +34,7 @@ var csSpriteLite = new Class({
       self.frame = self.loop_from;
       self.current_position = {x : self.loop_start_coor.x, y : self.loop_start_coor.y};
     }
+
     if (self.ignored_frames.indexOf(self.frame) !== -1)
       self.nextStep();
   },
@@ -76,7 +77,7 @@ var csSpriteLite = new Class({
         });
 
         self.frame++;
-      }, 100);
+      }, self.interval);
     };
     src_img.src = self.sprite_opts.url;
   }
