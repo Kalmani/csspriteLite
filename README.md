@@ -1,1 +1,1 @@
-# cssSpriteLite 
+# csspriteLite
