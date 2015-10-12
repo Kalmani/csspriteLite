@@ -1,0 +1,27 @@
+{
+  "name": "cssSpriteLite",
+  "version": "0.0.1",
+  "description": "An easy way to create a spinner from a sprite",
+  "main": "index.js",
+  "dependencies": {
+    "uclass": "~2.0.6"
+   },
+   "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Kalmani/cssSpriteLite.git"
+  },
+  "keywords": [
+    "sprite",
+    "javascript",
+    "spinner",
+    "css"
+  ],
+  "author": "Kolosowski Florent",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/Kalmani/cssSpriteLite/issues"
+  }
+}
