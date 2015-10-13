@@ -1,6 +1,6 @@
 # csSpriteLite
 
-csSpriteLite is a standalone ans light script to animate sprites.
+csSpriteLite is a standalone and light script to animate sprites.
 
 ### Version
 1.0.0
@@ -15,7 +15,7 @@ Pure javascript, no dependencies to any libraries !
 npm install css-sprite-lite
 ```
 
-### Exemple
+### Example
 ```
 //////////////////////////
 // dist file
@@ -32,8 +32,8 @@ document.onreadystatechange = function () {
             url : "sprite.png",
             width  : 184,
             height : 325,
-            loop_from : 0, //21
-            ignored_frames : [],
+            loop_from : 8,
+            ignored_frames : [29, 30],
             interval : 100
         });
         sprite.play();
@@ -68,6 +68,7 @@ https://www.npmjs.com/package/css-sprite-lite
 ### Todos
  - Accept coords for ignored_frames and loop_from
  - Write tests, tests, TESTS !
+ - Add pause / restart methods
 
 ### License
 MIT License style, please distribute & credit me somewhere.
