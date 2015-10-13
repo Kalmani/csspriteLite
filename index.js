@@ -1,4 +1,4 @@
-var Class    = require('uclass');
+var Class = require('uclass');
 
 var csSpriteLite = new Class({
 
@@ -7,6 +7,9 @@ var csSpriteLite = new Class({
   ],
 
   options : {
+    url : null,
+    width : 200,
+    height : 200,
     interval : 100,
     anchor : document.body,
     loop_from : 0,
@@ -22,7 +25,6 @@ var csSpriteLite = new Class({
   initialize : function(options) {
     var self = this;
     self.setOptions(options);
-    self.sprite_opts = options.sprite;
   },
 
   nextStep : function() {
@@ -33,9 +35,9 @@ var csSpriteLite = new Class({
       self.loop_flag = true;
     }
 
-    self.options.current_position.x += self.sprite_opts.element_width;
+    self.options.current_position.x += self.options.width;
     if (self.img_size.width <= self.options.current_position.x) 
-      self.options.current_position = {x : 0, y : self.options.current_position.y + self.sprite_opts.element_height};
+      self.options.current_position = {x : 0, y : self.options.current_position.y + self.options.height};
 
     if (self.img_size.height <= self.options.current_position.y) {
       self.frame = self.options.loop_from;
@@ -65,11 +67,11 @@ var csSpriteLite = new Class({
       canvas.id  = "css-sprite";
 
       self.setStyles(canvas, {
-        "backgroundImage"    : "url('" + self.sprite_opts.url + "')",
+        "backgroundImage"    : "url('" + self.options.url + "')",
         "backgroundRepeat"   : "no-repeat",
         "backgroundPosition" : "0px 0px",
-        "width"              : self.sprite_opts.element_width || 200,
-        "height"             : self.sprite_opts.element_height || 200
+        "width"              : self.options.width || 200,
+        "height"             : self.options.height || 200
       });
 
       self.options.anchor.appendChild(canvas);
@@ -86,7 +88,7 @@ var csSpriteLite = new Class({
         self.frame++;
       }, self.options.interval);
     };
-    src_img.src = self.sprite_opts.url;
+    src_img.src = self.options.url;
   }
 });
 

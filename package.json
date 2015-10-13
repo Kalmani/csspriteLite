@@ -1,7 +1,7 @@
 {
   "name": "css-sprite-lite",
   "version": "0.0.2",
-  "description": "An easy way to create a spinner from a sprite",
+  "description": "An easy AND LIGHT way to create a spinner from a sprite",
   "main": "index.js",
   "dependencies": {
     "uclass": "~2.0.6"

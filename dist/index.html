@@ -1,0 +1,26 @@
+<html>
+<head>
+  <title>CsspriteLite</title>
+  <script type="text/javascript" src="csSpriteLite.js">;</script>
+</head>
+<body>
+  <div id="cssprit-container"></div>
+  <script type="text/javascript">
+    document.onreadystatechange = function () {
+      if (document.readyState == "complete") {
+        var sprite = new csSpriteLite({
+          anchor : document.getElementById('cssprit-container'),
+          url : "sprite.png",
+          width  : 184, //450
+          height : 325, //450
+          loop_from : 0, //21
+          ignored_frames : [], //62?
+          interval : 100
+        });
+
+        sprite.play();
+      }
+    }
+  </script>
+</body>
+</html>
