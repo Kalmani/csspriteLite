@@ -23,10 +23,11 @@ var csSpriteLite = new Class({
     }
   },
 
+  interval : null,
+
   initialize : function(options) {
     var self = this;
     self.setOptions(options);
-    console.log(self.options);
   },
 
   nextStep : function() {
@@ -81,7 +82,7 @@ var csSpriteLite = new Class({
       self.frame = 0,
       self.loop_flag = false;
 
-      setInterval(function() {
+      self.interval = setInterval(function() {
         self.nextStep();
         self.setStyles(canvas, {
           "backgroundPosition" : "-" + self.options.current_position.x + "px -" + self.options.current_position.y + "px"
@@ -91,7 +92,13 @@ var csSpriteLite = new Class({
       }, self.options.interval);
     };
     src_img.src = self.options.url;
+  },
+
+  stop : function() {
+    var self = this;
+    clearInterval(self.interval);
   }
+
 });
 
 module.exports = csSpriteLite;
