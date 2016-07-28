@@ -1,6 +1,10 @@
-var Class = require('uclass');
+"use strict";
+
+var Class    = require('uclass');
+var onRemove = require('udom/element/onRemove');
 
 var csSpriteLite = new Class({
+  Binds : ['stop'],
 
   Implements : [
     require('uclass/options')
@@ -77,7 +81,7 @@ var csSpriteLite = new Class({
       });
 
       self.options.anchor.appendChild(canvas);
-
+      onRemove(canvas, self.stop);
       self.frame = 0,
       self.loop_flag = false;
 
