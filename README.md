@@ -3,7 +3,7 @@
 csSpriteLite is a standalone and light script to animate sprites.
 
 ### Version
-1.0.0
+1.2.0
 
 ### Tech
 Pure javascript, no dependencies to any libraries !
