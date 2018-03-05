@@ -9,21 +9,13 @@ csSpriteLite is a standalone and light script to animate sprites.
 Pure javascript, no dependencies to any libraries !
 
 ### Installation
-* In pure client side, just take the dist/csSpriteLite.js file and use it as in the exemple.
-* You can also use the npm module, require and browserify it.
 ```
 npm install css-sprite-lite
 ```
 
 ### Example
 ```
-//////////////////////////
-// dist file
-<script type="text/javascript" src="csSpriteLite.js">;</script>
-// browserified
-var csSpriteLite = require('csSpriteLite');
-/////////////////////////
- 
+const csSpriteLite = require('csSpriteLite');
  
 document.onreadystatechange = function () {
     if (document.readyState == "complete") {
@@ -53,14 +45,6 @@ document.onreadystatechange = function () {
 
 ### NB
 loop_from and ignored_frames options work with frame numbers : for exemple, if you have 8 frames of intro, you should loop from frame 8 (begin with frame 0, same thing for ignored_frames)...
-
-### Dev mode
-
-Don't forget to rebuild the compiled file if needed :
-```sh
-$ browserify index.js --standalone csSpriteLite > dist/csSpriteLite.js
-```
-it AS to be in standalone mode to be used in a non browserified app
 
 You can find this module on npmjs.com :
 https://www.npmjs.com/package/css-sprite-lite
