@@ -4,11 +4,11 @@
   "description": "An easy AND LIGHT way to create a spinner from a sprite",
   "main": "index.js",
   "dependencies": {
-    "uclass": "^2.0.7",
+    "mout": "^1.1.0",
     "udom": "^1.6.1"
   },
   "scripts": {
-    "test": "npm test"
+    "eslint": "eslint index.js"
   },
   "repository": {
     "type": "git",
