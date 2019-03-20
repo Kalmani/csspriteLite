@@ -36,6 +36,7 @@ class csSpriteLite {
     }
 
     this.options.current_position.x += this.options.width;
+
     if(this.img_size.width <= this.options.current_position.x)
       this.options.current_position = {x : 0, y : this.options.current_position.y + this.options.height};
 
@@ -55,9 +56,10 @@ class csSpriteLite {
 
   play() {
     var src_img = new Image();
+    var self    = this;
 
-    src_img.onload = () => {
-      this.img_size = {
+    src_img.onload = function() {
+      self.img_size = {
         width  : this.width,
         height : this.height
       };
@@ -66,29 +68,27 @@ class csSpriteLite {
 
       canvas.id  = 'css-sprite';
 
-      this.setStyles(canvas, {
-        backgroundImage    : `url('${this.options.url}')`,
+      self.setStyles(canvas, {
+        backgroundImage    : `url('${self.options.url}')`,
         backgroundRepeat   : 'no-repeat',
         backgroundPosition : '0px 0px',
-        width              : this.options.width || 200,
-        height             : this.options.height || 200
+        width              : self.options.width || 200,
+        height             : self.options.height || 200
       });
 
-      this.options.anchor.appendChild(canvas);
+      self.options.anchor.appendChild(canvas);
+      onRemove(canvas, self.stop);
+      self.frame     = 0;
+      self.loop_flag = false;
 
-      onRemove(canvas, this.stop);
-
-      this.frame     = 0;
-      this.loop_flag = false;
-
-      this.interval = setInterval(() => {
-        this.nextStep();
-        this.setStyles(canvas, {
-          backgroundPosition : `-${this.options.current_position.x}px -${this.options.current_position.y}px`
+      self.interval = setInterval(() => {
+        self.nextStep();
+        self.setStyles(canvas, {
+          backgroundPosition : `-${self.options.current_position.x}px -${self.options.current_position.y}px`
         });
 
-        this.frame++;
-      }, this.options.interval);
+        self.frame++;
+      }, self.options.interval);
     };
 
     src_img.src = this.options.url;
