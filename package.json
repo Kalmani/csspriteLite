@@ -7,6 +7,9 @@
     "mout": "^1.1.0",
     "udom": "^1.6.1"
   },
+  "devDependencies": {
+    "eslint-plugin-ivs": "^2.0.2"
+  },
   "scripts": {
     "eslint": "eslint index.js"
   },

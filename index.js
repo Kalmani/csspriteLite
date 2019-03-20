@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const deepMixIn = require('mout/object/deepMixIn');
 const onRemove  = require('udom/element/onRemove');
@@ -62,26 +62,29 @@ class csSpriteLite {
         height : this.height
       };
 
-      var canvas = document.createElement("div");
-      canvas.id  = "css-sprite";
+      var canvas = document.createElement('div');
+
+      canvas.id  = 'css-sprite';
 
       this.setStyles(canvas, {
         backgroundImage    : `url('${this.options.url}')`,
-        backgroundRepeat   : "no-repeat",
-        backgroundPosition : "0px 0px",
+        backgroundRepeat   : 'no-repeat',
+        backgroundPosition : '0px 0px',
         width              : this.options.width || 200,
         height             : this.options.height || 200
       });
 
       this.options.anchor.appendChild(canvas);
+
       onRemove(canvas, this.stop);
-      this.frame = 0,
+
+      this.frame     = 0;
       this.loop_flag = false;
 
       this.interval = setInterval(() => {
         this.nextStep();
         this.setStyles(canvas, {
-          "backgroundPosition" : `-${this.options.current_position.x}px -${this.options.current_position.y}px`
+          backgroundPosition : `-${this.options.current_position.x}px -${this.options.current_position.y}px`
         });
 
         this.frame++;

@@ -1,6 +1,6 @@
 {
   "root": true,
   "extends": [
-    "plugin:ivs/browser"
+    "plugin:ivs/browser-stage3"
   ]
 }
