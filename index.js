@@ -6,8 +6,7 @@ const onRemove  = require('udom/element/onRemove');
 class csSpriteLite {
 
   constructor(options) {
-    this.stop = this.stop.bind(this);
-
+    this.pause   = this.pause.bind(this);
     this.options = {
       url       : null,
       width     : 200,
@@ -24,6 +23,8 @@ class csSpriteLite {
       }
     };
 
+    self.canvas   = null;
+    this.img_size = null;
     this.interval = null;
 
     deepMixIn(this.options, (options || {}));
@@ -55,6 +56,9 @@ class csSpriteLite {
   }
 
   play() {
+    if(this.canvas)
+      return this.createInterval();
+
     var src_img = new Image();
     var self    = this;
 
@@ -64,11 +68,10 @@ class csSpriteLite {
         height : this.height
       };
 
-      var canvas = document.createElement('div');
+      self.canvas     = document.createElement('div');
+      self.canvas.id  = 'css-sprite';
 
-      canvas.id  = 'css-sprite';
-
-      self.setStyles(canvas, {
+      self.setStyles(self.canvas, {
         backgroundImage    : `url('${self.options.url}')`,
         backgroundRepeat   : 'no-repeat',
         backgroundPosition : '0px 0px',
@@ -76,25 +79,31 @@ class csSpriteLite {
         height             : self.options.height || 200
       });
 
-      self.options.anchor.appendChild(canvas);
-      onRemove(canvas, self.stop);
+      self.options.anchor.appendChild(self.canvas);
+
+      onRemove(self.canvas, self.pause);
+
       self.frame     = 0;
       self.loop_flag = false;
 
-      self.interval = setInterval(() => {
-        self.nextStep();
-        self.setStyles(canvas, {
-          backgroundPosition : `-${self.options.current_position.x}px -${self.options.current_position.y}px`
-        });
-
-        self.frame++;
-      }, self.options.interval);
+      self.createInterval();
     };
 
     src_img.src = this.options.url;
   }
 
-  stop() {
+  createInterval() {
+    this.interval = setInterval(() => {
+      this.nextStep();
+      this.setStyles(this.canvas, {
+        backgroundPosition : `-${this.options.current_position.x}px -${this.options.current_position.y}px`
+      });
+
+      this.frame++;
+    }, this.options.interval);
+  }
+
+  pause() {
     clearInterval(this.interval);
   }
 
